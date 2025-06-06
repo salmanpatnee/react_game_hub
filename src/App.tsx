@@ -5,7 +5,7 @@ import GenreList from "./components/genres/GenreList"
 
 
 function App() {
-  
+
 
   return (
     <Grid
@@ -13,18 +13,22 @@ function App() {
         base: `"nav" "main"`,
         lg: `"nav nav" "aside main"`
       }}
-     
+      templateColumns={{
+        base: '1fr',
+        lg: '200px 1fr'
+      }}
+
     >
       <GridItem area="nav">
-        <Navbar />  
+        <Navbar />
       </GridItem>
       <Stack hideBelow="lg">
-        <GridItem area="aside" >
+        <GridItem area="aside" paddingX={5} >
           <GenreList />
         </GridItem>
       </Stack>
       <GridItem area="main">
-        <GameGrid/>
+        <GameGrid />
       </GridItem>
     </Grid>
   )
