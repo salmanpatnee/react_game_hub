@@ -29,13 +29,13 @@ function App() {
       <GridItem area="nav">
         <Navbar />
       </GridItem>
-      <Stack hideBelow="lg">
-        <GridItem area="aside" paddingX={5} >
-          <GenreList onSelectGenre={(genre) => handleSelectedGenre(genre)}/>
-        </GridItem>
-      </Stack>
+      <GridItem area="aside" paddingX={5} >
+        <Stack hideBelow="lg">
+          <GenreList selectedGenre={selectedGenre} onSelectGenre={(genre) => handleSelectedGenre(genre)} />
+        </Stack>
+      </GridItem>
       <GridItem area="main">
-        <GameGrid genre={selectedGenre}/>
+        <GameGrid genre={selectedGenre} />
       </GridItem>
     </Grid>
   )
