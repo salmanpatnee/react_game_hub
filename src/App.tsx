@@ -1,46 +1,54 @@
-import { Grid, GridItem, Stack } from "@chakra-ui/react"
-import Navbar from "./components/globals/Navbar"
-import GameGrid from "./components/games/GameGrid"
-import GenreList from "./components/genres/GenreList"
-import { useState } from "react"
-import type { Genre } from "./hooks/useGenre"
-import PlatformSelector from "./components/globals/PlatformSelector"
-
+import { Grid, GridItem, Stack } from "@chakra-ui/react";
+import Navbar from "./components/globals/Navbar";
+import GameGrid from "./components/games/GameGrid";
+import GenreList from "./components/genres/GenreList";
+import { useState } from "react";
+import type { Genre } from "./hooks/useGenre";
+import PlatformSelector from "./components/globals/PlatformSelector";
+import type { Platform } from "./hooks/usePlatform";
 
 function App() {
+  const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
+  const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(
+    null
+  );
 
-  const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null)
+  const handleSelectedGenre = (genre: Genre) => setSelectedGenre(genre);
 
-  const handleSelectedGenre = (genre: Genre) => {
-    setSelectedGenre(genre)
-  }
+  const handleSelectedPlatform = (platform: Platform) =>
+    setSelectedPlatform(platform);
 
   return (
     <Grid
       templateAreas={{
         base: `"nav" "main"`,
-        lg: `"nav nav" "aside main"`
+        lg: `"nav nav" "aside main"`,
       }}
       templateColumns={{
-        base: '1fr',
-        lg: '200px 1fr'
+        base: "1fr",
+        lg: "200px 1fr",
       }}
-
     >
       <GridItem area="nav">
         <Navbar />
       </GridItem>
-      <GridItem area="aside" paddingX={5} >
+      <GridItem area="aside" paddingX={5}>
         <Stack hideBelow="lg">
-          <GenreList selectedGenre={selectedGenre} onSelectGenre={(genre) => handleSelectedGenre(genre)} />
+          <GenreList
+            selectedGenre={selectedGenre}
+            onSelectGenre={(genre) => handleSelectedGenre(genre)}
+          />
         </Stack>
       </GridItem>
       <GridItem area="main">
-        <PlatformSelector />
-        <GameGrid genre={selectedGenre} />
+        <PlatformSelector
+          onSelectPlatform={(platform) => handleSelectedPlatform(platform)}
+          selectedPlatform={selectedPlatform}
+        />
+        <GameGrid genre={selectedGenre} platform={selectedPlatform} />
       </GridItem>
     </Grid>
-  )
+  );
 }
 
-export default App
+export default App;
