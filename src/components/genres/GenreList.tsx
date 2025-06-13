@@ -1,5 +1,5 @@
 import useGenre, { type Genre } from '@/hooks/useGenre'
-import { Button, HStack, Image, List, Spinner } from '@chakra-ui/react'
+import { Button, Heading, HStack, Image, List, Spinner } from '@chakra-ui/react'
 
 interface Props {
   onSelectGenre: (genre: Genre) => void;
@@ -12,6 +12,10 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
   if (isLoading) return <Spinner />
 
   return (
+    <>
+    <Heading size="lg" margin={2}>
+      Genres
+    </Heading>
     <List.Root variant={'plain'}>{data.map(genre => <List.Item key={genre.id} paddingY={'5px'}>
       <HStack>
         <List.Indicator asChild>
@@ -22,12 +26,13 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
             borderRadius="full"
             objectFit="cover" />
         </List.Indicator>
-        <Button variant={'plain'} fontWeight={selectedGenre?.id === genre.id ? 'bold' : 'normal'} padding="0" fontSize={'lg'} onClick={() => onSelectGenre(genre)} >
+        <Button variant={'plain'} whiteSpace='normal' textAlign='left' fontWeight={selectedGenre?.id === genre.id ? 'bold' : 'normal'} padding="0" fontSize={'md'} onClick={() => onSelectGenre(genre)} >
           {genre.name}
         </Button>
       </HStack>
     </List.Item>)}
     </List.Root>
+    </>
   )
 }
 
