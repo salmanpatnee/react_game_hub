@@ -13,7 +13,7 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
 
   return (
     <>
-    <Heading size="lg" margin={2}>
+    <Heading size="2xl" margin={2}>
       Genres
     </Heading>
     <List.Root variant={'plain'}>{data.map(genre => <List.Item key={genre.id} paddingY={'5px'}>
